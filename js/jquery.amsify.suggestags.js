@@ -243,15 +243,6 @@
 
             addTag : function(value) {
               if(!value) return;
-              if(this.tagNames.length === settings.tagLimit){
-                  return
-              }
-              if(value.length < settings.minLength || value.length > settings.maxLength){
-                  return
-              }
-              if(settings.firstCharIsAlpha && !(/^[a-zA-Z()]+$/.test(value.charAt(0)))){
-                  return 
-              }
               var html  = '<span class="'+this.classes.tagItem.substring(1)+'" data-val="'+value+'">'+value+' '+this.setIcon()+'</span>';
               $item = $(html).insertBefore($(this.selectors.sTagsInput));
               var itemKey = $.inArray(value, settings.suggestions);
@@ -259,6 +250,21 @@
                 this.animateRemove($item, true);
                 this.flashItem(value);
                 return false;
+              }
+              if(this.tagNames.length === settings.tagLimit){
+                  this.animateRemove($item, true);
+                  this.flashItem(value);
+                  return false;
+              }
+              if(value.length < settings.minLength || value.length > settings.maxLength){
+                  this.animateRemove($item, true);
+                  this.flashItem(value);
+                  return false;
+              }
+              if(settings.firstCharIsAlpha && !(/^[a-zA-Z()]+$/.test(value.charAt(0)))){
+                  this.animateRemove($item, true);
+                  this.flashItem(value);
+                  return false;
               }
               if(this.isPresent(value)) {
                 this.animateRemove($item, true);
