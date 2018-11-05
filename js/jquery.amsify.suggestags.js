@@ -13,6 +13,8 @@
         var settings = $.extend({
             type          : 'bootstrap',
             tagLimit      : 5,
+            minLength     : 5,
+            maxLength     : 12,
             suggestions   : [],
             classes       : [],
             backgrounds   : [],
@@ -241,6 +243,9 @@
             addTag : function(value) {
               if(!value) return;
               if(this.tagNames.length === settings.tagLimit){
+                  return
+              }
+              if(value.length < settings.minLength || value.length > settings.maxLength){
                   return
               }
               var html  = '<span class="'+this.classes.tagItem.substring(1)+'" data-val="'+value+'">'+value+' '+this.setIcon()+'</span>';
