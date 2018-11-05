@@ -20,6 +20,7 @@
             whiteList     : false,
             afterAdd      : {},
             afterRemove   : {},
+            isPrintValue  : false,
         }, options);
 
         /**
@@ -239,6 +240,9 @@
 
             addTag : function(value) {
               if(!value) return;
+              if(this.tagNames.length === settings.tagLimit){
+                  return
+              }
               var html  = '<span class="'+this.classes.tagItem.substring(1)+'" data-val="'+value+'">'+value+' '+this.setIcon()+'</span>';
               $item = $(html).insertBefore($(this.selectors.sTagsInput));
               var itemKey = $.inArray(value, settings.suggestions);
@@ -359,7 +363,9 @@
             },
 
             printValues : function() {
-              console.info(this.tagNames, $(this.selector).val());
+              if(settings.isPrintValue !== false){
+                  console.info(this.tagNames, $(this.selector).val());
+              }
             },
 
             refresh : function(selector, method) {
