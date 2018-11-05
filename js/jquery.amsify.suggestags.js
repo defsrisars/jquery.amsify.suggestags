@@ -23,6 +23,7 @@
             afterAdd      : {},
             afterRemove   : {},
             isPrintValue  : false,
+            firstCharIsAlpha : false,
         }, options);
 
         /**
@@ -247,6 +248,9 @@
               }
               if(value.length < settings.minLength || value.length > settings.maxLength){
                   return
+              }
+              if(settings.firstCharIsAlpha && !(/^[a-zA-Z()]+$/.test(value.charAt(0)))){
+                  return 
               }
               var html  = '<span class="'+this.classes.tagItem.substring(1)+'" data-val="'+value+'">'+value+' '+this.setIcon()+'</span>';
               $item = $(html).insertBefore($(this.selectors.sTagsInput));
