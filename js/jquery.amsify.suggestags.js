@@ -12,7 +12,7 @@
          */
         var settings = $.extend({
             type          : 'bootstrap',
-            tagLimit      : 5,
+            tagLimit      : false,
             minLength     : 5,
             maxLength     : 12,
             suggestions   : [],
@@ -251,7 +251,7 @@
                 this.flashItem(value);
                 return false;
               }
-              if(this.tagNames.length === settings.tagLimit){
+              if(settings.tagLimit !== false && this.tagNames.length === settings.tagLimit){
                   this.animateRemove($item, true);
                   this.flashItem(value);
                   return false;
