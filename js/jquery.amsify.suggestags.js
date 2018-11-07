@@ -117,6 +117,9 @@
               });
               $(this.selectors.sTagsInput).blur(function(){
                 $(this).closest(_self.classes.inputArea).removeClass(_self.classes.focus.substring(1));
+                // blur 視同 add addTag
+                _self.addTag($(this).val())
+                $(this).val('')
               });
               $(this.selectors.sTagsInput).keyup(function(e){
                 var keycode = (e.keyCode ? e.keyCode : e.which);
